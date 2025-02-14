@@ -17,7 +17,10 @@ const Column = ({
 
             <div className=' h-full w-[350px]  bg-black border-2  p-4 overflow-y-auto rounded-md'>
                 <div className="flex items-center justify-between pb-2">
-                    <h2 className='ml-1 font-serif text-2xl font-semibold pb-2'>{title}</h2>
+                    <h2 className='ml-1  text-2xl font-semibold pb-2 flex items-center gap-3'> <span>{title} </span>  <span className="bg-blue-600/80 text-white text-sm w-6 h-6 flex items-center justify-center rounded-full">
+                        {filteredTasks.length}
+                    </span>
+                    </h2>
                     <AddTask status={status} />
 
                 </div>
