@@ -13,9 +13,9 @@ const Column = ({
     const filteredTasks = tasks.filter(task => task.status === status)
 
     return (
-        <section className=' w-[400px]  '>
+        <section className=' w-[350px]  '>
 
-            <div className=' h-full w-[400px]  bg-zinc-700/50 border-2 border-zinc-600 p-4 overflow-y-auto'>
+            <div className=' h-full w-[350px]  bg-black border-2  p-4 overflow-y-auto rounded-md'>
                 <div className="flex items-center justify-between pb-2">
                     <h2 className='ml-1 font-serif text-2xl font-semibold pb-2'>{title}</h2>
                     <AddTask status={status} />

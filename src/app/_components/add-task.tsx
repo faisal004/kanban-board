@@ -39,12 +39,12 @@ const AddTask = ({ status }: { status: Status }) => {
         setDescription("");
         setPriority("LOW")
         setOpen(false)
-    };
+    }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button size={"sm"}>
+                <Button size={"icon"} variant={"link"} >
                     <Plus />
                 </Button>
             </DialogTrigger>

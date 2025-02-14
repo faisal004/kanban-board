@@ -2,10 +2,12 @@ import Column from './column'
 
 const Columns = () => {
   return (
-    <section className='mt-10 flex gap-12 overflow-x-auto p-3 h-[400px]'>
+    <section className='flex gap-6 overflow-x-auto p-3 h-[calc(100vh-5rem)]'>
       <Column title='Todo' status='TODO' />
       <Column title='In Progress' status='IN_PROGRESS' />
       <Column title='Done' status='DONE' />
+
+
     </section>
   )
 }
