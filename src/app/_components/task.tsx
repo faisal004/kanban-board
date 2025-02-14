@@ -1,12 +1,21 @@
 import type { Task } from '@/types/types'
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from '@/components/ui/button'
-import { Calendar, MoreHorizontal } from 'lucide-react'
+import { Calendar, MoreHorizontal, Pen, Trash } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from '@/components/ui/badge'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+
+    DropdownMenuTrigger,
+} from "@/components/ui/dropDownMenu"
+import { useTaskStore } from '@/store/taskStore'
 
 const Task = ({
+    id,
     title,
     description,
     status,
@@ -14,18 +23,20 @@ const Task = ({
     assignee,
     dueDate
 }: Task) => {
+    const removeTask = useTaskStore(state => state.removeTask)
+
     const getVariant = (priority: string) => {
         switch (priority.toLowerCase()) {
-          case "high":
-            return "destructive";
-          case "medium":
-            return "warning"; 
-          case "low":
-            return "success";
-          default:
-            return "secondary";
+            case "high":
+                return "destructive";
+            case "medium":
+                return "warning";
+            case "low":
+                return "success";
+            default:
+                return "secondary";
         }
-      };
+    };
     return (
         <Card className="w-full bg-zinc-800 text-white border-zinc-700">
             <CardHeader className="flex-row items-start justify-between space-y-0 p-4 pb-2">
@@ -33,9 +44,21 @@ const Task = ({
                     <div className="h-2 w-2 rounded-full bg-blue-500 "></div>
                     <span className="">{status}</span>
                 </Badge>
-                <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400">
-                    <MoreHorizontal className="h-4 w-4" />
-                </Button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400">
+                            <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem><Pen /> Edit</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => removeTask(id)} className='bg-red-900 hover:bg-red-950'> <Trash /> Delete</DropdownMenuItem>
+
+
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
+
             </CardHeader>
             <CardContent className="space-y-2 px-4">
                 <div>

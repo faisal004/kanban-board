@@ -1,11 +1,11 @@
-import DarkLightModeButton from "./dark-light-button";
+// import DarkLightModeButton from "./dark-light-button";
 
 const Navbar = () => {
     return (<div className="flex items-center justify-center w-full mx-auto border-b-2 border-zinc-600 " >
         <div className="flex items-center justify-between w-full py-3 container ">
             <h1 className="text-2xl font-bold ">Tender Tasks</h1>
-
-            <DarkLightModeButton />
+{/* 
+            <DarkLightModeButton /> */}
 
         </div>
 

@@ -3,6 +3,8 @@ import { useTaskStore } from "@/store/taskStore"
 import Task from "./task"
 import { Columns } from "@/types/types"
 import AddTask from "./add-task"
+import { Button } from "@/components/ui/button"
+import { MoreHorizontal } from "lucide-react"
 
 
 const Column = ({
@@ -21,7 +23,11 @@ const Column = ({
                         {filteredTasks.length}
                     </span>
                     </h2>
-                    <AddTask status={status} />
+                    <div className="flex items-center gap-1">     <AddTask status={status} />
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400">
+                            <MoreHorizontal className="h-4 w-4" />
+                        </Button></div>
+
 
                 </div>
 
