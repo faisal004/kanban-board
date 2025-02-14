@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropDownMenu"
 import { useTaskStore } from '@/store/taskStore'
 import EditTask from './update-task'
+import { formatDate } from '@/utils/formatDate'
 
 const Task = ({
     id,
@@ -85,7 +86,7 @@ const Task = ({
                 </div>
 
                 <div className="flex items-center justify-between">
-                    <span className='text-xs text-zinc-400 flex items-center gap-1'><Calendar className='size-4 ' /> {dueDate}</span>
+                    <span className='text-xs text-zinc-400 flex items-center gap-1'><Calendar className='size-4 ' /> {formatDate( dueDate)}</span>
                     <Badge variant={getVariant(priority)} >
                         {priority}
                     </Badge>
