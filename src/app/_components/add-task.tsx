@@ -44,7 +44,7 @@ const AddTask = ({ status }: { status: Status }) => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-            <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400">
+            <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-100">
                     <Plus  className="size-4"/>
                 </Button>
             </DialogTrigger>

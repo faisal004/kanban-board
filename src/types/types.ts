@@ -1,5 +1,5 @@
 
-export type Status = "TODO" | "IN_PROGRESS" | "DONE"
+export type Status = string
 export type Priority = "HIGH" | "MEDIUM" | "LOW"
 export type Assignee={
     id:string,
@@ -30,7 +30,23 @@ export type Actions = {
 
 }
 
-export type Columns = {
+// export type Columns = {
+//     title: string,
+//     status: Status
+// }
+export type Column = {
+    id: string,
     title: string,
-    status: Status
+    status: Status,
+    color: string
+}
+export type ColumnsState = {
+    columns: Column[],
+    
+}
+export type ColumnActions = {
+    
+    addColumn: (title: string, color: string) => void,
+    removeColumn: (id: string) => void,
+    updateColumn: (id: string, updatedFields: Partial<Column>) => void
 }
