@@ -1,4 +1,5 @@
 import type { Task } from '@/types/types'
+import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from '@/components/ui/button'
 import { Calendar, MoreHorizontal, Trash } from 'lucide-react'
@@ -41,60 +42,67 @@ const Task = ({
         }
     };
     return (
-        <Card className="w-full bg-zinc-800 text-white border-zinc-700 hover:rotate-1 cursor-move hover:scale-105 transition-all duration-300" draggable      onDragStart={() => dragTask(id)}>
-            <CardHeader className="flex-row items-start justify-between space-y-0 p-4 pb-2">
-                <Badge className='flex items-center gap-2 bg-blue-500/30 text-white hover:bg-blue-500/20' >
-                    <div className="h-2 w-2 rounded-full bg-blue-500 "></div>
-                    <span className="">{status}</span>
-                </Badge>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400">
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuItem asChild><EditTask task={{ id, title, description, status, priority, assignee, dueDate }} />
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => removeTask(id)} className='bg-red-900 hover:bg-red-950'> <Trash /> Delete</DropdownMenuItem>
-
-
-                    </DropdownMenuContent>
-                </DropdownMenu>
-
-
-            </CardHeader>
-            <CardContent className="space-y-2 px-4">
-                <div>
-                    <h3 className="font-semibold line-clamp-1">{title}</h3>
-                    <p className="text-sm text-zinc-400 line-clamp-2">{description}</p>
-                </div>
-                <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-zinc-100">Assignee</span>
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger>
-                                <Avatar className="h-6 w-6">
-                                    <AvatarImage src={assignee.avatar} />
-                                    <AvatarFallback>{assignee.name}</AvatarFallback>
-                                </Avatar>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>{assignee.name}</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                </div>
-
-                <div className="flex items-center justify-between">
-                    <span className='text-xs text-zinc-400 flex items-center gap-1'><Calendar className='size-4 ' /> {formatDate( dueDate)}</span>
-                    <Badge variant={getVariant(priority)} >
-                        {priority}
+        <motion.div
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -5 }}
+            transition={{ duration: 0.3 }}
+        >
+            <Card className="w-full bg-zinc-800 text-white border-zinc-700  hover:border-zinc-400 cursor-move hover:scale-[1.02] transition-all duration-300" draggable onDragStart={() => dragTask(id)}>
+                <CardHeader className="flex-row items-start justify-between space-y-0 p-4 pb-2">
+                    <Badge className='flex items-center gap-2 bg-blue-500/30 text-white hover:bg-blue-500/20' >
+                        <div className="h-2 w-2 rounded-full bg-blue-500 "></div>
+                        <span className="">{status}</span>
                     </Badge>
-                </div>
-            </CardContent>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400">
+                                <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuItem asChild><EditTask task={{ id, title, description, status, priority, assignee, dueDate }} />
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => removeTask(id)} className='bg-red-900 hover:bg-red-950'> <Trash /> Delete</DropdownMenuItem>
 
-        </Card>
+
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+
+                </CardHeader>
+                <CardContent className="space-y-2 px-4">
+                    <div>
+                        <h3 className="font-semibold line-clamp-1">{title}</h3>
+                        <p className="text-sm text-zinc-400 line-clamp-2">{description}</p>
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold text-zinc-100">Assignee</span>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <Avatar className="h-6 w-6">
+                                        <AvatarImage src={assignee.avatar} />
+                                        <AvatarFallback>{assignee.name}</AvatarFallback>
+                                    </Avatar>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>{assignee.name}</p>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                        <span className='text-xs text-zinc-400 flex items-center gap-1'><Calendar className='size-4 ' /> {formatDate(dueDate)}</span>
+                        <Badge variant={getVariant(priority)} >
+                            {priority}
+                        </Badge>
+                    </div>
+                </CardContent>
+
+            </Card>
+        </motion.div>
     )
 }
 
