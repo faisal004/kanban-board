@@ -1,4 +1,4 @@
-import Columns from "./_components/colums";
+import Columns from "./_components/columns";
 
 export default function Home() {
   return (
