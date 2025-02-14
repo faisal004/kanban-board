@@ -1,7 +1,7 @@
 import type { Task } from '@/types/types'
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from '@/components/ui/button'
-import { Calendar, MoreHorizontal, MoreVertical } from 'lucide-react'
+import { Calendar, MoreHorizontal } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from '@/components/ui/badge'
