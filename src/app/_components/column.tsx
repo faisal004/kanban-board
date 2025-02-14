@@ -14,18 +14,18 @@ const Column = ({
     const tasks = useTaskStore(state => state.tasks)
     const filteredTasks = tasks.filter(task => task.status === status)
     const dragTask = useTaskStore(state => state.dragTask)
-    const updateTaskAfterDrag=useTaskStore(state=>state.updateTaskAfterDrag)
+    const updateTaskAfterDrag = useTaskStore(state => state.updateTaskAfterDrag)
 
     const draggedTask = useTaskStore(state => state.draggedTask)
     const handleDrop = () => {
         if (!draggedTask) return
         updateTaskAfterDrag(draggedTask, status)
         dragTask(null)
-      }
-    
+    }
+
     return (
-        <section className=' w-[350px]  '    onDrop={handleDrop}
-        onDragOver={e => e.preventDefault()}>
+        <section  className=' w-[350px]  ' onDrop={handleDrop}
+            onDragOver={e => e.preventDefault()}>
 
             <div className=' h-full w-[350px]  bg-black border-2  p-4 overflow-y-auto rounded-md'>
                 <div className="flex items-center justify-between pb-2">
