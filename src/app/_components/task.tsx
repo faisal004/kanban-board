@@ -26,6 +26,7 @@ const Task = ({
     dueDate
 }: Task) => {
     const removeTask = useTaskStore(state => state.removeTask)
+    const dragTask = useTaskStore(state => state.dragTask)
 
     const getVariant = (priority: string) => {
         switch (priority.toLowerCase()) {
@@ -40,7 +41,7 @@ const Task = ({
         }
     };
     return (
-        <Card className="w-full bg-zinc-800 text-white border-zinc-700">
+        <Card className="w-full bg-zinc-800 text-white border-zinc-700" draggable      onDragStart={() => dragTask(id)}>
             <CardHeader className="flex-row items-start justify-between space-y-0 p-4 pb-2">
                 <Badge className='flex items-center gap-2 bg-blue-500/30 text-white hover:bg-blue-500/20' >
                     <div className="h-2 w-2 rounded-full bg-blue-500 "></div>

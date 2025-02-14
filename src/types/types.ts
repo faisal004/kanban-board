@@ -17,14 +17,17 @@ export type Task = {
 }
 
 export type State = {
-    tasks: Task[]
+    tasks: Task[],
+    draggedTask: string | null
 }
 
 export type Actions = {
     addTask: (title: string, description: string, status: Status, priority: Priority, assignee:Assignee,dueDate:string) => void
-    
+    dragTask: (id: string | null) => void
     removeTask: (title: string) => void
-    updateTask: (id:string,updatedFields: Partial<Task>) => void
+    updateTask: (id:string,updatedFields: Partial<Task>) => void,
+    updateTaskAfterDrag: (title: string, status: Status) => void
+
 }
 
 export type Columns = {

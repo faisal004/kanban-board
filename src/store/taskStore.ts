@@ -4,6 +4,7 @@ import { Actions, Assignee, Priority, State, Status, Task } from '@/types/types'
 
 export const useTaskStore = create<State & Actions>((set) => ({
   tasks: [],
+  draggedTask: null,
   addTask: (title: string, description: string, status: Status, priority: Priority, assignee: Assignee, dueDate: string) =>
     set((state) => ({
       tasks: [
@@ -11,6 +12,8 @@ export const useTaskStore = create<State & Actions>((set) => ({
         { id: uuid(), title, description, status, priority, assignee, dueDate }
       ]
     })),
+    dragTask: (id: string | null) => set({ draggedTask: id }),
+
   removeTask: (id: string) =>
     set((state) => ({
       tasks: state.tasks.filter(task => task.id !== id)
@@ -20,5 +23,11 @@ export const useTaskStore = create<State & Actions>((set) => ({
       tasks: state.tasks.map((task) =>
         task.id === id ? { ...task, ...updatedFields } : task
       )
-    }))
+    })),
+    updateTaskAfterDrag: (id: string, status: Status) =>
+      set(state => ({
+        tasks: state.tasks.map(task =>
+          task.id === id ? { ...task, status } : task
+        )
+      }))
 }));
