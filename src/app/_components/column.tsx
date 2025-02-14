@@ -24,11 +24,11 @@ const Column = ({
     }
 
     return (
-        <section className=' w-[350px]  ' onDrop={handleDrop}
+        <section className=' w-[400px]  ' onDrop={handleDrop}
             onDragOver={e => e.preventDefault()}>
 
-            <div className=' h-full w-[350px]  bg-black border-2  overflow-y-auto rounded-md'>
-                <div className="flex items-center justify-between  sticky top-0 bg-black/85 z-50 pb-2">
+            <div className=' h-full w-[400px]  bg-black border-2  overflow-y-auto rounded-md '>
+                <div className="flex items-center justify-between  sticky top-0 bg-black/85 z-50 pb-2 px-2">
                     <h2 className='ml-1  text-2xl font-semibold pb-2 flex items-center gap-3 p-3'> <span>{title} </span>  <span className="bg-blue-600/80 text-white text-sm w-6 h-6 flex items-center justify-center rounded-full">
                         {filteredTasks.length}
                     </span>
@@ -41,7 +41,7 @@ const Column = ({
 
                 </div>
 
-                <div className='flex flex-col gap-4 p-4'>
+                <div className='flex flex-col gap-4 space-y-4 p-7'>
                     {filteredTasks.map(task => (
                         <Task key={task.id} {...task} />
                     ))}
