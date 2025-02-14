@@ -1,9 +1,11 @@
-import Board from "./_components/Board";
+import Columns from "./_components/colums";
 
 export default function Home() {
   return (
     <>
-      <Board/>
+         <div className='mx-auto w-full max-w-7xl px-6'>
+        <Columns />
+      </div>
     </>
   );
 }
