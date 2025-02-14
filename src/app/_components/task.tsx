@@ -41,7 +41,7 @@ const Task = ({
         }
     };
     return (
-        <Card className="w-full bg-zinc-800 text-white border-zinc-700 hover:shadow-lg scale-110" draggable      onDragStart={() => dragTask(id)}>
+        <Card className="w-full bg-zinc-800 text-white border-zinc-700 hover:rotate-1 cursor-move hover:scale-105 transition-all duration-300" draggable      onDragStart={() => dragTask(id)}>
             <CardHeader className="flex-row items-start justify-between space-y-0 p-4 pb-2">
                 <Badge className='flex items-center gap-2 bg-blue-500/30 text-white hover:bg-blue-500/20' >
                     <div className="h-2 w-2 rounded-full bg-blue-500 "></div>

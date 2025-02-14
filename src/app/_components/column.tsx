@@ -41,7 +41,7 @@ const Column = ({
 
                 </div>
 
-                <div className='flex flex-col gap-4 space-y-4 p-7'>
+                <div className='flex flex-col gap-4  p-4'>
                     {filteredTasks.map(task => (
                         <Task key={task.id} {...task} />
                     ))}
