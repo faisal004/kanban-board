@@ -1,7 +1,7 @@
 import type { Task } from '@/types/types'
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from '@/components/ui/button'
-import { Calendar, MoreHorizontal, Pen, Trash } from 'lucide-react'
+import { Calendar, MoreHorizontal, Trash } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from '@/components/ui/badge'
@@ -13,6 +13,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropDownMenu"
 import { useTaskStore } from '@/store/taskStore'
+import EditTask from './update-task'
 
 const Task = ({
     id,
@@ -51,7 +52,8 @@ const Task = ({
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem><Pen /> Edit</DropdownMenuItem>
+                        <DropdownMenuItem asChild><EditTask task={{ id, title, description, status, priority, assignee, dueDate }} />
+                        </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => removeTask(id)} className='bg-red-900 hover:bg-red-950'> <Trash /> Delete</DropdownMenuItem>
 
 

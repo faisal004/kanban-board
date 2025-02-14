@@ -22,8 +22,9 @@ export type State = {
 
 export type Actions = {
     addTask: (title: string, description: string, status: Status, priority: Priority, assignee:Assignee,dueDate:string) => void
+    
     removeTask: (title: string) => void
-    updateTask: (title: string, status: Status) => void
+    updateTask: (id:string,updatedFields: Partial<Task>) => void
 }
 
 export type Columns = {
