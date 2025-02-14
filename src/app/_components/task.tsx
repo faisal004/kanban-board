@@ -1,16 +1,12 @@
-import React from 'react'
+import type { Task } from '@/types/types'
 
 const Task = ({
     title,
     description,
     status,
-    priority
-}: {
-    title: string
-    description: string
-    status: string
-    priority: string
-}) => {
+    priority,
+    assignee
+}: Task) => {
     return (
         <div
             className=
@@ -20,6 +16,7 @@ const Task = ({
                 <p className='text-sm font-light text-gray-500'>{description}</p>
                 <p className='text-sm font-light text-gray-500'>{status}</p>
                 <p className='text-sm font-light text-gray-500'>{priority}</p>
+                <p className='text-sm font-light text-gray-500'>{assignee.name}</p>
             </div>
         </div>
     )

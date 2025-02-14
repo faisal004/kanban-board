@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/text-area";
 import { Plus } from "lucide-react";
-import { Priority, Status } from "@/types/types";
+import {  Priority, Status } from "@/types/types";
 import {
     Select,
     SelectContent,
@@ -20,6 +20,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { users } from "@/data/usersData";
+import Image from "next/image";
 
 const AddTask = ({ status }: { status: Status }) => {
     const addTask = useTaskStore((state) => state.addTask);
@@ -27,10 +29,11 @@ const AddTask = ({ status }: { status: Status }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState<Priority>("LOW");
+    const [assignedUser, setAssignedUser] = useState<string | null>(null);
 
     const handleAddTask = () => {
-        if (!title.trim() || !description.trim() || !priority) return;
-        addTask(title, description, status, priority as Priority);
+        if (!title.trim() || !description.trim() || !priority || !assignedUser) return;
+        addTask(title, description, status, priority as Priority, JSON.parse(assignedUser));
         setTitle("");
         setDescription("");
         setPriority("LOW")
@@ -72,6 +75,28 @@ const AddTask = ({ status }: { status: Status }) => {
                         <SelectItem value="HIGH">High</SelectItem>
                         <SelectItem value="MEDIUM">Medium</SelectItem>
                         <SelectItem value="LOW">Low</SelectItem>
+                    </SelectContent>
+                </Select>
+                <Select value={assignedUser as string} onValueChange={(value) => setAssignedUser(value as string)}>
+                    <SelectTrigger className="w-full ">
+                        <SelectValue placeholder="Select Assigned User" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {users.map((user) => (
+                            <SelectItem key={user.id} value={JSON.stringify(user)} >
+                                <div className="flex gap-2 items-center justify-start group">
+                                    <Image
+                                        src={user.avatar}
+                                        alt={user.name}
+                                        className="w-6 h-6 rounded-full transition-transform duration-200 group-hover:scale-110"
+                                        height={200}
+                                        width={200}
+                                    />
+                                    <span>{user.name}</span>
+                                </div>
+
+                            </SelectItem>
+                        ))}
                     </SelectContent>
                 </Select>
                 <Button onClick={handleAddTask}>Add Task</Button>

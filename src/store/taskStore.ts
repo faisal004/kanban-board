@@ -1,17 +1,17 @@
 import { create } from 'zustand'
 import { v4 as uuid } from 'uuid'
-import { Actions, Priority, State, Status } from '@/types/types'
+import { Actions, Assignee, Priority, State, Status } from '@/types/types'
 
 
 export const useTaskStore = create<State & Actions>()(
 
     set => ({
       tasks: [],
-      addTask: (title: string, description: string,status:Status,priority:Priority) =>
+      addTask: (title: string, description: string,status:Status,priority:Priority,assignee:Assignee) =>
         set(state => ({
           tasks: [
             ...state.tasks,
-            { id: uuid(), title, description, status: status,priority:priority }
+            { id: uuid(), title, description, status: status,priority:priority,assignee }
           ]
         })),
       removeTask: (id: string) =>
