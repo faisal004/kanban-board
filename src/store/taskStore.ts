@@ -7,11 +7,11 @@ export const useTaskStore = create<State & Actions>()(
 
     set => ({
       tasks: [],
-      addTask: (title: string, description: string,status:Status,priority:Priority,assignee:Assignee) =>
+      addTask: (title: string, description: string,status:Status,priority:Priority,assignee:Assignee,dueDate:string) =>
         set(state => ({
           tasks: [
             ...state.tasks,
-            { id: uuid(), title, description, status: status,priority:priority,assignee }
+            { id: uuid(), title, description, status: status,priority:priority,assignee,dueDate }
           ]
         })),
       removeTask: (id: string) =>

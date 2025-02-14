@@ -12,7 +12,8 @@ export type Task = {
     description: string,
     status: Status,
     priority: Priority,
-    assignee: Assignee
+    assignee: Assignee,
+    dueDate: string;
 }
 
 export type State = {
@@ -20,7 +21,7 @@ export type State = {
 }
 
 export type Actions = {
-    addTask: (title: string, description: string, status: Status, priority: Priority, assignee:Assignee) => void
+    addTask: (title: string, description: string, status: Status, priority: Priority, assignee:Assignee,dueDate:string) => void
     removeTask: (title: string) => void
     updateTask: (title: string, status: Status) => void
 }

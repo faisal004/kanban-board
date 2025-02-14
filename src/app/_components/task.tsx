@@ -5,7 +5,8 @@ const Task = ({
     description,
     status,
     priority,
-    assignee
+    assignee,
+    dueDate
 }: Task) => {
     return (
         <div
@@ -17,6 +18,8 @@ const Task = ({
                 <p className='text-sm font-light text-gray-500'>{status}</p>
                 <p className='text-sm font-light text-gray-500'>{priority}</p>
                 <p className='text-sm font-light text-gray-500'>{assignee.name}</p>
+                <p className='text-sm font-light text-gray-500'>{dueDate}</p>
+
             </div>
         </div>
     )

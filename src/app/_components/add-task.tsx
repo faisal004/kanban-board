@@ -30,10 +30,11 @@ const AddTask = ({ status }: { status: Status }) => {
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState<Priority>("LOW");
     const [assignedUser, setAssignedUser] = useState<string | null>(null);
+    const [dueDate, setDueDate] = useState<string >(JSON.stringify(Date.now()) );
 
     const handleAddTask = () => {
-        if (!title.trim() || !description.trim() || !priority || !assignedUser) return;
-        addTask(title, description, status, priority as Priority, JSON.parse(assignedUser));
+        if (!title.trim() || !description.trim() || !priority || !assignedUser || !dueDate) return;
+        addTask(title, description, status, priority as Priority, JSON.parse(assignedUser),dueDate);
         setTitle("");
         setDescription("");
         setPriority("LOW")
@@ -99,6 +100,12 @@ const AddTask = ({ status }: { status: Status }) => {
                         ))}
                     </SelectContent>
                 </Select>
+                <Input
+                    placeholder="Due Date"
+                    type="date"
+                    value={dueDate as string}
+                    onChange={(e) => setDueDate(e.target.value)}
+                />
                 <Button onClick={handleAddTask}>Add Task</Button>
             </DialogContent>
         </Dialog>
