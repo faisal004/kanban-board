@@ -14,7 +14,16 @@ export type Task = {
     priority: Priority,
     assignee: Assignee,
     dueDate: string;
+    comments?: Comment[];
 }
+export interface Comment {
+    id: string;
+    userId: string;
+    userName: string;
+    content: string;
+    timestamp: string;
+  }
+  
 
 export type State = {
     tasks: Task[],
@@ -26,7 +35,9 @@ export type Actions = {
     dragTask: (id: string | null) => void
     removeTask: (title: string) => void
     updateTask: (id:string,updatedFields: Partial<Task>) => void,
-    updateTaskAfterDrag: (title: string, status: Status) => void
+    updateTaskAfterDrag: (title: string, status: Status) => void,
+    addComment: (taskId: string, comment: Comment) => void;
+
 
 }
 
