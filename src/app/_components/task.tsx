@@ -7,10 +7,15 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from '@/components/ui/badge'
 import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
+import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-
     DropdownMenuTrigger,
 } from "@/components/ui/dropDownMenu"
 import { useTaskStore } from '@/store/taskStore'
@@ -18,6 +23,7 @@ import EditTask from './update-task'
 import { formatDate } from '@/utils/formatDate'
 import { hexToRgba } from '@/utils/hexToRgba';
 import { getVariant } from '@/utils/get-badge-variant';
+import { useState } from 'react'
 
 interface TaskWithColor extends Task {
     color: string
@@ -35,7 +41,25 @@ const Task = ({
 }: TaskWithColor) => {
     const removeTask = useTaskStore(state => state.removeTask)
     const dragTask = useTaskStore(state => state.dragTask)
-   
+    const [showDetails, setShowDetails] = useState(false)
+
+    const handleDragStart = (e: React.DragEvent) => {
+        e.stopPropagation()
+        dragTask(id)
+    }
+    const handleCardClick = (e: React.MouseEvent) => {
+        if (e.target === e.currentTarget || e.target instanceof Element && e.currentTarget.contains(e.target)) {
+            const isDropdownClick = e.target instanceof Element && (
+                e.target.closest('button') ||
+                e.target.closest('.dropdown-menu') ||
+                e.target.closest('dialog')
+            );
+            
+            if (!isDropdownClick) {
+                setShowDetails(true)
+            }
+        }}
+    
 
     return (
         <motion.div
@@ -44,7 +68,11 @@ const Task = ({
             exit={{ opacity: 0, y: -5 }}
             transition={{ duration: 0.3 }}
         >
-            <Card className="w-full bg-zinc-800 text-white  cursor-move hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] hover:shadow-zinc-700 transition-all duration-300" draggable onDragStart={() => dragTask(id)}>
+            <Card
+                className="w-full bg-zinc-800 text-white cursor-pointer hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] hover:shadow-zinc-700 transition-all duration-300"
+                draggable
+                onDragStart={handleDragStart}
+                onClick={handleCardClick}            >
                 <CardHeader className="flex-row items-start justify-between space-y-0 p-4 pb-2">
                     <Badge
                         style={{ backgroundColor: hexToRgba(color, 0.4) }}
@@ -56,20 +84,30 @@ const Task = ({
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400">
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 text-zinc-400"
+                                onClick={(e) => e.stopPropagation()} // Prevent modal from opening
+                            >
                                 <MoreHorizontal className="h-4 w-4" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                            <DropdownMenuItem asChild><EditTask task={{ id, title, description, status, priority, assignee, dueDate }} />
+                            <DropdownMenuItem asChild>
+                                <EditTask task={{ id, title, description, status, priority, assignee, dueDate }} />
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => removeTask(id)} className='bg-red-900 hover:bg-red-950'> <Trash /> Delete</DropdownMenuItem>
-
-
+                            <DropdownMenuItem
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    removeTask(id)
+                                }}
+                                className='bg-red-900 hover:bg-red-950'
+                            >
+                                <Trash /> Delete
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-
-
                 </CardHeader>
                 <CardContent className="space-y-2 px-4">
                     <div>
@@ -92,16 +130,69 @@ const Task = ({
                             </Tooltip>
                         </TooltipProvider>
                     </div>
-
                     <div className="flex items-center justify-between">
-                        <span className='text-xs text-zinc-400 flex items-center gap-1'><Calendar className='size-4 ' /> {formatDate(dueDate)}</span>
-                        <Badge variant={getVariant(priority)} >
+                        <span className='text-xs text-zinc-400 flex items-center gap-1'>
+                            <Calendar className='size-4' /> {formatDate(dueDate)}
+                        </span>
+                        <Badge variant={getVariant(priority)}>
                             {priority}
                         </Badge>
                     </div>
                 </CardContent>
-
             </Card>
+
+            <Dialog open={showDetails} onOpenChange={setShowDetails}>
+                <DialogContent className="bg-zinc-900 text-white">
+                    <DialogHeader>
+                        <DialogTitle className="text-xl font-bold">{title}</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-6">
+                        <div>
+                            <h4 className="text-sm font-semibold text-zinc-400 mb-2">Description</h4>
+                            <p className="text-zinc-100">{description}</p>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <div>
+                                <h4 className="text-sm font-semibold text-zinc-400 mb-2">Status</h4>
+                                <Badge
+                                    style={{ backgroundColor: hexToRgba(color, 0.4) }}
+                                    className="flex items-center gap-2 text-white w-fit"
+                                >
+                                    <div style={{ backgroundColor: color }} className="h-2 w-2 rounded-full"></div>
+                                    <span>{status}</span>
+                                </Badge>
+                            </div>
+
+                            <div>
+                                <h4 className="text-sm font-semibold text-zinc-400 mb-2">Priority</h4>
+                                <Badge variant={getVariant(priority)}>
+                                    {priority}
+                                </Badge>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 className="text-sm font-semibold text-zinc-400 mb-2">Assignee</h4>
+                            <div className="flex items-center gap-2">
+                                <Avatar className="h-8 w-8">
+                                    <AvatarImage src={assignee.avatar} />
+                                    <AvatarFallback>{assignee.name}</AvatarFallback>
+                                </Avatar>
+                                <span className="text-zinc-100">{assignee.name}</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 className="text-sm font-semibold text-zinc-400 mb-2">Due Date</h4>
+                            <span className="text-zinc-100 flex items-center gap-2">
+                                <Calendar className="h-4 w-4" />
+                                {formatDate(dueDate)}
+                            </span>
+                        </div>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </motion.div>
     )
 }

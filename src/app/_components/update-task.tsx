@@ -53,7 +53,10 @@ const EditTask = ({ task }: { task: Task }) => {
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger  className="flex items-center gap-2 p-2 w-full">
+            <DialogTrigger onClick={(e) => {
+                e.stopPropagation()
+            }} className="flex items-center gap-2 p-2 w-full">
+
                 <Pencil className="size-4" />
                 Edit
             </DialogTrigger>
