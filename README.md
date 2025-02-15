@@ -68,10 +68,6 @@ Contains static image assets.
 
 ---
 
-This structure ensures modularity, reusability, and maintainability in your KanbanBoard project. 🚀
-
-
-
 
 ## Development
 
