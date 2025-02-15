@@ -123,8 +123,7 @@ const Task = ({
                                     e.stopPropagation()
                                     removeTask(id)
                                 }}
-                                className='bg-red-900 hover:bg-red-950'
-                            >
+                                className='dark:bg-red-900 dark:hover:bg-red-950 hover:bg-red-200'>
                                 <Trash /> Delete
                             </DropdownMenuItem>
                         </DropdownMenuContent>

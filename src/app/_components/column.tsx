@@ -47,7 +47,7 @@ const Column = ({
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
 
-                                <DropdownMenuItem onClick={() => removeColumn(id)} className='bg-red-900 hover:bg-red-950'> <Trash /> Delete</DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => removeColumn(id)} className='dark:bg-red-900 dark:hover:bg-red-950 hover:bg-red-200'> <Trash /> Delete</DropdownMenuItem>
 
 
                             </DropdownMenuContent>
