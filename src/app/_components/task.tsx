@@ -16,6 +16,8 @@ import {
 import { useTaskStore } from '@/store/taskStore'
 import EditTask from './update-task'
 import { formatDate } from '@/utils/formatDate'
+import { hexToRgba } from '@/utils/hexToRgba';
+import { getVariant } from '@/utils/get-badge-variant';
 
 interface TaskWithColor extends Task {
     color: string
@@ -33,24 +35,8 @@ const Task = ({
 }: TaskWithColor) => {
     const removeTask = useTaskStore(state => state.removeTask)
     const dragTask = useTaskStore(state => state.dragTask)
-    const hexToRgba = (hex: string, opacity: number) => {
-        const r = parseInt(hex.substring(1, 3), 16);
-        const g = parseInt(hex.substring(3, 5), 16);
-        const b = parseInt(hex.substring(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
-    };
-    const getVariant = (priority: string) => {
-        switch (priority.toLowerCase()) {
-            case "high":
-                return "destructive";
-            case "medium":
-                return "warning";
-            case "low":
-                return "success";
-            default:
-                return "secondary";
-        }
-    };
+   
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 5 }}
