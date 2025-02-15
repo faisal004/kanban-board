@@ -17,6 +17,10 @@ import { useTaskStore } from '@/store/taskStore'
 import EditTask from './update-task'
 import { formatDate } from '@/utils/formatDate'
 
+interface TaskWithColor extends Task {
+    color: string
+}
+
 const Task = ({
     id,
     title,
@@ -24,11 +28,17 @@ const Task = ({
     status,
     priority,
     assignee,
-    dueDate
-}: Task) => {
+    dueDate,
+    color
+}: TaskWithColor) => {
     const removeTask = useTaskStore(state => state.removeTask)
     const dragTask = useTaskStore(state => state.dragTask)
-
+    const hexToRgba = (hex: string, opacity: number) => {
+        const r = parseInt(hex.substring(1, 3), 16);
+        const g = parseInt(hex.substring(3, 5), 16);
+        const b = parseInt(hex.substring(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    };
     const getVariant = (priority: string) => {
         switch (priority.toLowerCase()) {
             case "high":
@@ -50,10 +60,14 @@ const Task = ({
         >
             <Card className="w-full bg-zinc-800 text-white border-zinc-700  hover:border-zinc-400 cursor-move hover:scale-[1.02] transition-all duration-300" draggable onDragStart={() => dragTask(id)}>
                 <CardHeader className="flex-row items-start justify-between space-y-0 p-4 pb-2">
-                    <Badge className='flex items-center gap-2 bg-blue-500/30 text-white hover:bg-blue-500/20' >
-                        <div className="h-2 w-2 rounded-full bg-blue-500 "></div>
-                        <span className="">{status}</span>
+                    <Badge
+                        style={{ backgroundColor: hexToRgba(color, 0.4) }}
+                        className="flex items-center gap-2 text-white"
+                    >
+                        <div style={{ backgroundColor: color }} className="h-2 w-2 rounded-full"></div>
+                        <span>{status}</span>
                     </Badge>
+
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400">
