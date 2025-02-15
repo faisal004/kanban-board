@@ -4,10 +4,13 @@ import Task from "./task"
 import { Column as Col } from "@/types/types"
 import AddTask from "./add-task"
 import { Button } from "@/components/ui/button"
-import { MoreHorizontal } from "lucide-react"
+import { MoreHorizontal, Trash } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropDownMenu"
+import { useColumnStore } from "@/store/columnStore"
 
 
 const Column = ({
+    id,
     title,
     status,
     color
@@ -15,6 +18,7 @@ const Column = ({
     const tasks = useTaskStore(state => state.tasks)
     const filteredTasks = tasks.filter(task => task.status === status)
     const dragTask = useTaskStore(state => state.dragTask)
+    const removeColumn = useColumnStore(state => state.removeColumn)
     const updateTaskAfterDrag = useTaskStore(state => state.updateTaskAfterDrag)
 
     const draggedTask = useTaskStore(state => state.draggedTask)
@@ -36,11 +40,23 @@ const Column = ({
                     </span>
                     </h2>
                     <div className="flex items-center gap-1">     <AddTask status={status} />
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
                         <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-100">
                             <MoreHorizontal className="h-4 w-4" />
-                        </Button></div>
+                        </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          
+                            <DropdownMenuItem onClick={() => removeColumn(id)} className='bg-red-900 hover:bg-red-950'> <Trash /> Delete</DropdownMenuItem>
 
 
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                   
+                   </div>
+
+                   
                 </div>
 
                 <div className='flex flex-col gap-4  p-4'>
