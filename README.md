@@ -66,8 +66,6 @@ Utility functions used across the app to keep the codebase clean and reusable.
 ### `public/images/`
 Contains static image assets.
 
----
-
 
 ## Development
 
