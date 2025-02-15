@@ -173,7 +173,7 @@ const Task = ({
             </Card>
 
             <Dialog open={showDetails} onOpenChange={setShowDetails}>
-                <DialogContent className="bg-zinc-900 text-white max-w-7xl grid grid-cols-2 gap-3 max-h-[600px]">
+                <DialogContent className="bg-zinc-900 text-white max-w-7xl grid md:grid-cols-2 grid-cols-1 gap-3 max-h-[600px] overflow-auto">
                     <div className='flex flex-col space-y-5'>
                         <DialogHeader>
                             <DialogTitle className="text-xl font-bold">{title}</DialogTitle>
