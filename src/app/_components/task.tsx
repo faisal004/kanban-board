@@ -58,7 +58,7 @@ const Task = ({
             exit={{ opacity: 0, y: -5 }}
             transition={{ duration: 0.3 }}
         >
-            <Card className="w-full bg-zinc-800 text-white border-zinc-700  hover:border-zinc-400 cursor-move hover:scale-[1.02] transition-all duration-300" draggable onDragStart={() => dragTask(id)}>
+            <Card className="w-full bg-zinc-800 text-white  cursor-move hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] hover:shadow-zinc-700 transition-all duration-300" draggable onDragStart={() => dragTask(id)}>
                 <CardHeader className="flex-row items-start justify-between space-y-0 p-4 pb-2">
                     <Badge
                         style={{ backgroundColor: hexToRgba(color, 0.4) }}
