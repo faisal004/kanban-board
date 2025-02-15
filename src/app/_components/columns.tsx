@@ -2,6 +2,7 @@
 import Column from './column';
 import { useColumnStore } from '@/store/columnStore';
 
+// All the columns
 const Columns = () => {
   const columns = useColumnStore(state => state.columns);
 

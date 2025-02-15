@@ -1,3 +1,4 @@
+// this funtions is to add opacity to status badge color
 export const hexToRgba = (hex: string, opacity: number) => {
     const r = parseInt(hex.substring(1, 3), 16);
     const g = parseInt(hex.substring(3, 5), 16);

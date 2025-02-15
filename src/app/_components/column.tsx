@@ -27,7 +27,7 @@ const Column = ({
         updateTaskAfterDrag(draggedTask, status)
         dragTask(null)
     }
-
+// Single column
     return (
         <section className="w-[400px]" onDrop={handleDrop}
             onDragOver={e => e.preventDefault()}>

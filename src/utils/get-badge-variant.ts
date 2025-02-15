@@ -1,3 +1,4 @@
+// This function return badge variant
 export const getVariant = (priority: string) => {
     switch (priority.toLowerCase()) {
         case "high":
