@@ -38,6 +38,7 @@ const AddTask = ({ status }: { status: Status }) => {
         setTitle("");
         setDescription("");
         setPriority("LOW")
+        setAssignedUser(null)
         setOpen(false)
     }
 
