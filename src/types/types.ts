@@ -61,3 +61,21 @@ export type ColumnActions = {
     removeColumn: (id: string) => void,
     updateColumn: (id: string, updatedFields: Partial<Column>) => void
 }
+
+export interface FormData {
+    title: string;
+    description: string;
+    status: Status;
+    priority: Priority;
+    assignedUser: string;
+    dueDate: string;
+}
+
+export interface FormErrors {
+    title?: string;
+    description?: string;
+    status?: string;
+    priority?: string;
+    assignedUser?: string;
+    dueDate?: string;
+}
