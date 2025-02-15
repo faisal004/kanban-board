@@ -90,7 +90,7 @@ const Task = ({
             transition={{ duration: 0.3 }}
         >
             <Card
-                className="w-full bg-zinc-800 text-white cursor-pointer hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] hover:shadow-zinc-700 transition-all duration-300"
+                className="w-full bg-zinc-800 text-white cursor-pointer hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] hover:shadow-zinc-700 transition-all duration-300 border-zinc-800"
                 draggable
                 onDragStart={handleDragStart}
                 onClick={handleCardClick}            >
@@ -228,7 +228,7 @@ const Task = ({
 
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
-
+className='text-black dark:text-white'
                                 placeholder="Add a comment..."
                             />
                             <Button

@@ -31,9 +31,9 @@ const Column = ({
     return (
         <section className="w-[400px]" onDrop={handleDrop}
             onDragOver={e => e.preventDefault()}>
-            <div className=' h-full w-[400px]  bg-black  border-2  overflow-y-auto rounded-md '>
+            <div className=' h-full w-[400px]  bg-black  border-2 border-zinc-800 overflow-y-auto rounded-md '>
                 <div className="flex items-center justify-between  sticky top-0 bg-black/85 z-50 pb-2 px-2">
-                    <h2 className={`ml-1  text-2xl font-semibold pb-2 flex items-center gap-3 p-3  `}> <span style={{ backgroundColor: color }} className={` size-4 rounded-full`}> </span> <span>{title} </span>  <span className={`bg-blue-500/80 text-white text-sm w-5 h-5 flex items-center justify-center rounded-full`}>
+                    <h2 className={`ml-1  text-2xl font-semibold pb-2 flex items-center gap-3 p-3  `}> <span style={{ backgroundColor: color }} className={` size-4 rounded-full`}> </span> <span className="text-white">{title} </span>  <span className={`bg-blue-500/80 text-white text-sm w-5 h-5 flex items-center justify-center rounded-full`}>
 
                         {filteredTasks.length}
                     </span>
